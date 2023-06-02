@@ -1,43 +1,25 @@
+name: Auto-upload HTML page and publish to GitHub Pages
+
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: */10 * * * *
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build HTML
-        run: node index.js
-
-      - name: Publish artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: HTML
-          path: index.html
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: node index.js
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: HTML
-          path: ./public
-
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+        uses: actions/deploy-pages@v3
         with:
           branch: gh-pages
-          folder: ./public
+          path: ./public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
