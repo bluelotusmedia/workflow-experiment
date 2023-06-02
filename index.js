@@ -1,24 +1,20 @@
-const express = require('express');
-const app = express();
+const fs = require('fs');
 const path = require('path');
 
-// Create a new HTML page
+const publicDir = path.join(__dirname, 'public');
+
 const indexHtml = `
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Website</title>
+  <title>My Node.js App</title>
 </head>
 <body>
-<h1>Welcome to my website!</h1>
+  <h1>Hello, world!</h1>
 </body>
 </html>
 `;
 
-// Write the HTML page to the public folder
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+fs.writeFileSync(path.join(publicDir, 'index.html'), indexHtml);
 
-// Listen for requests on port 3000
-app.listen(3000);
+console.log('Index.html file created successfully!');
