@@ -1,16 +1,19 @@
-name: Auto-upload HTML page and publish to GitHub Pages
-
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: "*/10 * * * *"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm install
-      - run: node index.js
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: node index.js
 
   deploy:
     runs-on: ubuntu-latest
@@ -20,6 +23,15 @@ jobs:
         uses: actions/deploy-pages@v3
         with:
           branch: gh-pages
-          path: ./public
+          folder: ./public # Updated 'path' to 'folder'
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send deployment status
+        if: ${{ job.status == 'success' }}
+        run: echo "Deployment successful!"
+
+      - name: Send failure notification
+        if: ${{ job.status != 'success' }}
+        run: echo "Deployment failed! Check the workflow logs for more details."
+        # You can replace the 'echo' command with your preferred notification method.
