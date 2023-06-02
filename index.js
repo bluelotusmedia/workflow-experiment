@@ -10,7 +10,7 @@ const indexHtml = `
   <title>My Node.js App</title>
 </head>
 <body>
-  <h1>test 123.</h1>
+  <h1>test.</h1>
 </body>
 </html>
 `;
