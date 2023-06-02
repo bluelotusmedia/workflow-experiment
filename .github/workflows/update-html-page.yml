@@ -2,7 +2,7 @@ name: Auto-upload HTML page
 
 on:
   schedule:
-    - cron: */30 * * * *
+    - cron: */01 * * * *
 
 jobs:
   build:
