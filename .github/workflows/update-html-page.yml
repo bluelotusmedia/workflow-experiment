@@ -1,19 +1,13 @@
 on:
-  schedule:
-    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: node index.js
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: node index.js
 
   deploy:
     runs-on: ubuntu-latest
@@ -23,15 +17,6 @@ jobs:
         uses: actions/deploy-pages@v3
         with:
           branch: gh-pages
-          folder: ./public # Updated 'path' to 'folder'
+          path: ./public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Send deployment status
-        if: ${{ job.status == 'success' }}
-        run: echo "Deployment successful!"
-
-      - name: Send failure notification
-        if: ${{ job.status != 'success' }}
-        run: echo "Deployment failed! Check the workflow logs for more details."
-        # You can replace the 'echo' command with your preferred notification method.
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
