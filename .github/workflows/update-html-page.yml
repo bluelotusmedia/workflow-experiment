@@ -14,9 +14,9 @@ jobs:
     needs: build
     steps:
       - name: Check permissions of public directory
-        run: sudo ls -l public
+        run: sudo ls -l public/
       - name: Set permissions of public directory
-        run: sudo chmod 755 public
+        run: sudo chmod 755 public/
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Copy index.html from main branch to gh-pages branch
