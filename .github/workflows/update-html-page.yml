@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     container: node:16
     permissions:
-      contents: read-write
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - run: npm install
