@@ -17,6 +17,7 @@ jobs:
       - run: npm run build
       - name: Set Git username and email address
         run: |
+          git config --global --add safe.directory /__w/workflow-experiment/workflow-experiment
           git config --global user.name "Jacob Louis"
           git config --global user.email "jacob@bluelotusmedia.com"
       - name: Commit index.html file
