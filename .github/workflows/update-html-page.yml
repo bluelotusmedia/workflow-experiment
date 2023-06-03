@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install
+      - name: Change permissions on public directory
+        run: chmod -R 777 public/
       - run: npm run build
 
   deploy:
