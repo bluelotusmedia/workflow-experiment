@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Copy index.html from the branch that triggered the workflow to the gh-pages branch
-        run: git checkout ${{ github.event.workflow_run.branch }} -- public/index.html
+      - name: Copy index.html from main branch to gh-pages branch
+        run: git checkout main -- public/index.html
       - name: Deploy to GitHub Pages
-        uses: actions/gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./public
