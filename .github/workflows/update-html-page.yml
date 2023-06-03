@@ -1,14 +1,14 @@
 on:
   workflow_dispatch:
-  push: 
-    braches: 'main'
+  push:
+    branches: "main"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container: node:16
     permissions:
-      contents: write
+      contents: read-write
     steps:
       - uses: actions/checkout@v3
       - run: npm install
@@ -17,10 +17,10 @@ jobs:
       - run: npm run build
       - name: Set Git username and email address
         run: |
-          sudo git config --global user.name "Jacob Louis"
-          sudo git config --global user.email "jacob@bluelotusmedia.com"
+          git config --global user.name "Jacob Louis"
+          git config --global user.email "jacob@bluelotusmedia.com"
       - name: Commit index.html file
-        run: sudo git add public/index.html && sudo git commit -m 'Committing index.html file'
+        run: git add public/index.html && git commit -m 'Committing index.html file'
 
   deploy:
     runs-on: ubuntu-latest
