@@ -10,11 +10,13 @@ const indexHtml = `
   <title>My Node.js App</title>
 </head>
 <body>
-  <h1>hello world.</h1>
+  <h1>a whole new world.</h1>
 </body>
 </html>
 `;
 
-fs.writeFileSync(path.join(publicDir, 'index.html'), indexHtml);
+fs.writeFile(path.join(publicDir, 'index.html'), indexHtml, (err) => {
+  if (err) throw err;
+  console.log('index.html file created successfully!');
+});
 
-console.log('index.html file created successfully!');

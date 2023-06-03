@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/bluelotusmedia/workflow-experiment/issues"
   },
-  "homepage": "https://github.com/bluelotusmedia/workflow-experiment#readme",
+  "homepage": "https://bluelotusmedia.github.io/workflow-experiment/",
   "dependencies": {
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
