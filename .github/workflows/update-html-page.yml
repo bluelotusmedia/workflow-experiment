@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Check permissions of public directory
+        run: sudo ls -l ./public
       - name: Set permissions of public directory
-        run: sudo chmod 644 ./public/index.html
+        run: sudo chmod 755 ./public
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Copy index.html from main branch to gh-pages branch
