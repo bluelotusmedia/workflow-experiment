@@ -1,6 +1,7 @@
 on:
   workflow_dispatch:
-  push: main
+  push: 
+    braches: 'main'
 
 jobs:
   build:
